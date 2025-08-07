@@ -350,7 +350,7 @@ export default function Page() {
                     <p>
                       Code available @
                       <a
-                        href="https://github.com/karan9m/portfolio"
+                        href="https://github.com/karan9m/my-portfolio"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="underline hover:text-foreground"
