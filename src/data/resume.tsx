@@ -8,7 +8,7 @@ import DrJobMac from "../../public/images/drjob-mac.png";
 export const DATA = {
   name: "Karan Mavadiya 🧑‍💻",
   initials: "KM",
-  url: "https://github.com/karan9m/resume",
+  url: "https://github.com/karan9m/my-resume",
   location: "Ahmedabad, India",
   locationLink: "https://www.google.com/maps/place/Ahmedabad",
   description:

@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     title: "Karan mavadiya | Full Stack Developer",
     description:
       "Full Stack Developer specializing in React, Next.js, TypeScript and Node.js",
-    images: [`${DATA.url}/me.png`],
+    images: '/portfolio.png',
   },
 };
 
