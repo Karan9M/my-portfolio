@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: '/portfolio.png',
+        url: "/portfolio.png",
         width: 1200,
         height: 630,
         alt: "Karan mavadiya - Full Stack Developer",
@@ -65,7 +65,14 @@ export const metadata: Metadata = {
     title: "Karan mavadiya | Full Stack Developer",
     description:
       "Full Stack Developer specializing in React, Next.js, TypeScript and Node.js",
-    images: '/portfolio.png',
+    images: [
+      {
+        url: "/portfolio.png",
+        width: 1200,
+        height: 630,
+        alt: "Karan - Full Stack Developer",
+      },
+    ],
   },
 };
 
