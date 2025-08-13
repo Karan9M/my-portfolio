@@ -144,7 +144,7 @@ export function CliInterface({ onGuiCommand, onMinimize, onMaximize, onClose }: 
     
     setIsMounted(true);
     setOutput([
-      isMobile ? 'Welcome to prasen.dev CLI! 👋' : ASCII_ART + '\nWelcome to my portfolio CLI! 👋',
+      isMobile ? 'Welcome to Karan.dev CLI! 👋' : ASCII_ART + '\nWelcome to my portfolio CLI! 👋',
       'Type "help" or "?" to see available commands.',
       ''
     ]);

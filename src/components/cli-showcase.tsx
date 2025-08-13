@@ -32,7 +32,7 @@ export function CliShowcase() {
             <div className="h-3 w-3 rounded-full bg-green-500" />
           </div>
           <div className={`${theme === 'dark' ? 'text-zinc-400' : 'text-zinc-600'}`}>
-            prasen.dev — CLI
+            Karan.dev — CLI
           </div>
           <div className="w-16" />
         </div>

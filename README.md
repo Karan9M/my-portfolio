@@ -24,21 +24,4 @@ A modern, responsive portfolio website built with Next.js 14, TypeScript, Tailwi
 - **Content**: [MDX](https://mdxjs.com/)
 - **Deployment**: [Vercel](https://vercel.com)
 
-## 📦 Installation
-
-1. Clone the repository:
-```bash
-git clone https://github.com/StarKnightt/prasendev
-```
-
-2. Install dependencies:
-```bash
-npm install
-```
-
-3. Run the development server:
-```bash
-npm run dev
-```
-
 4. Open [http://localhost:3000](http://localhost:3000) in your browser.

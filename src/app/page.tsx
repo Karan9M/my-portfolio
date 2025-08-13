@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     siteName: DATA.name,
     images: [
       {
-        url: "https://prasen.dev/portfolio.png",
+        url: "https://mekaran.vercel.app/portfolio.png",
         width: 1200,
         height: 630,
         alt: `${DATA.name}'s Portfolio`,
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
     title: DATA.name,
     description: DATA.summary,
     creator: "@" + "Star_Knight12",
-    images: ["https://prasen.dev/portfolio.png"],
+    images: ["https://mekaran.vercel.app/portfolio.png"],
   },
 };
 

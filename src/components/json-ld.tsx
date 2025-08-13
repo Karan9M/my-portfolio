@@ -5,7 +5,7 @@ export function JsonLd() {
     name: 'Prasenjit Nayak',
     givenName: 'Prasenjit',
     familyName: 'Nayak',
-    url: 'https://prasen.dev',
+    url: 'https://mekaran.vercel.app/',
     jobTitle: 'Full Stack Developer',
     worksFor: {
       '@type': 'Organization',
