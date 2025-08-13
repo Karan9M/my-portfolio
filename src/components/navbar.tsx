@@ -1,5 +1,5 @@
+import { CliButton } from "@/components/cli-button";
 import { Dock, DockIcon } from "@/components/magicui/dock";
-import { ModeToggle } from "@/components/mode-toggle";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -9,8 +9,8 @@ import {
 } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
-import { CliButton } from "@/components/cli-button";
+// import Link from "next/link";
+import { Link } from "next-view-transitions";
 import ThemeToggleButton from "./ui/theme-toggle-button";
 
 export default function Navbar() {

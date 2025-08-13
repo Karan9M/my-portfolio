@@ -1,18 +1,14 @@
 import Navbar from "@/components/navbar";
+import { PageBackground } from "@/components/page-background";
+import { ScrollProgress } from "@/components/scroll-progress";
 import { ThemeProvider } from "@/components/theme-provider";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { DATA } from "@/data/resume";
 import { cn } from "@/lib/utils";
 import type { Metadata } from "next";
 import { Inter as FontSans } from "next/font/google";
-import Script from "next/script";
 import "./globals.css";
-import { ScrollProgress } from "@/components/scroll-progress";
-import { JsonLd } from "@/components/json-ld";
-import { PageBackground } from "@/components/page-background";
-import { Analytics } from "@vercel/analytics/react";
-import { GoogleAnalytics } from "@next/third-parties/google";
-import { SpeedInsights } from "@vercel/speed-insights/react";
+import { ViewTransitions } from "next-view-transitions";
 
 const fontSans = FontSans({
   subsets: ["latin"],
@@ -82,29 +78,31 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={cn(fontSans.variable, "font-sans antialiased")}>
-        {/* Background container */}
-        <div className="fixed inset-0 z-[-1]">
-          <PageBackground />
-        </div>
+    <ViewTransitions>
+      <html lang="en" suppressHydrationWarning>
+        <body className={cn(fontSans.variable, "font-sans antialiased")}>
+          {/* Background container */}
+          <div className="fixed inset-0 z-[-1]">
+            <PageBackground />
+          </div>
 
-        {/* Main content */}
-        <div className="relative z-10 max-w-2xl mx-auto py-12 sm:py-24 px-6">
-          <ScrollProgress />
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <TooltipProvider delayDuration={0}>
-              {children}
-              <Navbar />
-            </TooltipProvider>
-          </ThemeProvider>
-        </div>
-      </body>
-    </html>
+          {/* Main content */}
+          <div className="relative z-10 max-w-2xl mx-auto py-12 sm:py-24 px-6">
+            <ScrollProgress />
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <TooltipProvider delayDuration={0}>
+                {children}
+                <Navbar />
+              </TooltipProvider>
+            </ThemeProvider>
+          </div>
+        </body>
+      </html>
+    </ViewTransitions>
   );
 }
