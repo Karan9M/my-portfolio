@@ -14,7 +14,7 @@ export const DATA = {
   description:
     "A Full Stack Developer from India, Code is an art 🎨 be the artist!",
   summary:
-    "A Computer Science graduate from [LJ university](https://ljku.edu.in/), specialize in modern web development and am actively working on [open-source projects](https://github.com/karan9m). I'm passionate about creating impactful solutions and sharing knowledge through my [technical blog](https://mekaran.vercel.app/blog) as well as on [X(Twitter)](https://x.com/karan_9M/highlights) too | Free-lancer.",
+    "A Computer Science graduate from [LJ university](https://ljku.edu.in/), specialize in modern web development and am actively working on [open-source projects](https://github.com/karan9m). I'm passionate about creating impactful solutions and sharing knowledge through my [technical blog](https://mekaran.vercel.app/blog) as well as on [X(Twitter)](https://x.com/karandotcom/highlights) too | Free-lancer.",
   avatarUrl: "/Avatar.png",
   skills: [
     "React",
@@ -121,7 +121,7 @@ export const DATA = {
       },
       X: {
         name: "X",
-        url: "https://x.com/karan_9M",
+        url: "https://x.com/karandotcom",
         icon: Icons.x,
 
         navbar: true,
