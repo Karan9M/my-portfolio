@@ -1,0 +1,63 @@
+name: 🤖 Auto Blog Generator
+
+on:
+  schedule:
+    # Runs at 7:30 AM IST (2:00 UTC) and 7:30 PM IST (14:00 UTC)
+    - cron: "0 2 * * *"
+    - cron: "0 14 * * *"
+  # Allow manual trigger from GitHub Actions tab
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  generate-blog:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history needed for proper commits
+
+      - name: 🐍 Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: "pip"
+          cache-dependency-path: scripts/requirements.txt
+
+      - name: 📦 Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: ✍️ Generate blog post
+        id: generate
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}
+        run: python scripts/generate_blog.py
+
+      - name: 🔍 Check for new content
+        id: check_changes
+        run: |
+          git diff --name-only
+          if git diff --quiet && git diff --cached --quiet; then
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          fi
+
+      - name: 📝 Commit and push new blog post
+        if: steps.check_changes.outputs.has_changes == 'true'
+        run: |
+          git config --global user.name  "Karan's Blog Bot 🤖"
+          git config --global user.email "karanmavadiya38@gmail.com"
+          git add content/ scripts/posted_slugs.json
+          git commit -m "📝 Auto-blog: ${{ steps.generate.outputs.title }}"
+          git push
+
+      - name: ℹ️ No changes
+        if: steps.check_changes.outputs.has_changes == 'false'
+        run: echo "No new blog post was generated (no new articles or all already posted)."
