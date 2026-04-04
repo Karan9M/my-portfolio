@@ -137,8 +137,15 @@ export default function Page() {
           <section id="connect">
             <BlurFade delay={BLUR_FADE_DELAY * 4.5}>
               <div className="space-y-4">
-                <h2 className="text-xl font-bold">Let's collaborate 🤝🏻</h2>
-                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                  <h2 className="text-xl font-bold">Let's collaborate 🤝🏻</h2>
+                  <a href="/resume/Karan_Mavadiya_FullStack_Product_Engineer.pdf" target="_blank" rel="noopener noreferrer">
+                    <RainbowButton className="px-4 py-2 text-sm font-bold h-9">
+                      View full resume
+                    </RainbowButton>
+                  </a>
+                </div>
+                <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-2 pt-2">
                   {Object.entries(DATA.contact.social).map(
                     ([name, social], idx) => (
                       <SocialIconLink
@@ -170,6 +177,31 @@ export default function Page() {
                   </BlurFade>
                 ))}
               </div>
+            </div>
+          </section>
+
+          <section id="work">
+            <div className="flex min-h-0 flex-col gap-y-3">
+              <BlurFade delay={BLUR_FADE_DELAY * 11}>
+                <h2 className="text-xl font-bold">Work Experience</h2>
+              </BlurFade>
+              {DATA.work.map((job, id) => (
+                <BlurFade
+                  key={job.company + job.start}
+                  delay={BLUR_FADE_DELAY * 12 + id * 0.05}
+                >
+                  <ResumeCard
+                    href={job.href}
+                    logoUrl={job.logoUrl}
+                    altText={job.company}
+                    title={job.company}
+                    subtitle={job.title}
+                    badges={job.badges}
+                    period={`${job.start} - ${job.end}`}
+                    description={job.description}
+                  />
+                </BlurFade>
+              ))}
             </div>
           </section>
 
