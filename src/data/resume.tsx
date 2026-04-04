@@ -4,6 +4,9 @@ import SwiftMac from "../../public/images/swiftui-mac.png";
 import ResumeMac from "../../public/images/resume-mac.png";
 import SmartMac from "../../public/images/smart-mac.png";
 import DrJobMac from "../../public/images/drjob-mac.png";
+import MMateMac from "../../public/images/mmate-mac.png";
+import MyClassMac from "../../public/images/myclass-mac.png";
+import AiLeadMac from "../../public/images/ailead-mac.png";
 
 export const DATA = {
   name: "Karan Mavadiya 🧑‍💻",
@@ -12,26 +15,47 @@ export const DATA = {
   location: "Ahmedabad, India",
   locationLink: "https://www.google.com/maps/place/Ahmedabad",
   description:
-    "A Full Stack Developer from India, Code is an art 🎨 be the artist!",
+    "Full-Stack Product Engineer (AI-Augmented) — shipping production-grade B2B SaaS at 3× speed 🚀",
   summary:
-    "A Computer Science graduate from [LJ university](https://ljku.edu.in/), specialize in modern web development and am actively working on [open-source projects](https://github.com/karan9m). I'm passionate about creating impactful solutions and sharing knowledge through my [technical blog](https://mekaran.vercel.app/blog) as well as on [X(Twitter)](https://x.com/karandotcom/highlights) too | Free-lancer.",
+    "High-velocity Product Engineer specializing in shipping production-grade B2B SaaS from zero to one. I leverage an AI-augmented workflow (Cursor, Claude, Copilot, V0) to deliver features **3× faster** than standard development cycles — compressing 2-week sprints into 2 days without sacrificing architecture quality. Currently serving as the **sole architect and primary engineer** at [SpeedMVPs](https://speedmvps.com/), owning every layer from DB schema design to production UI. Built and launched [AiLeadz](https://www.aileadz.io/) — a live B2B platform with 250M+ verified contacts — as the single engineer behind all system-design and product decisions. Seeking to help early-stage founders ship their *Zero to One* products remotely.",
   avatarUrl: "/Avatar.png",
   skills: [
-    "React",
-    "Next.js",
-    "Typescript",
-    "Node.js",
-    "Java",
-    "MongoDB",
+    "TypeScript",
     "JavaScript",
-    "git",
-    "Linux",
-    "RestAPI",
-    "AI API",
-    "TailwindCSS",
-    "Framer-motion",
-    "GSAP",
     "Python",
+    "Java",
+    "Go",
+    "C/C++",
+    "SQL",
+    "React.js",
+    "Next.js",
+    "TailwindCSS",
+    "Framer Motion",
+    "GSAP",
+    "shadcn/ui",
+    "Node.js",
+    "FastAPI",
+    "Flask",
+    "REST API",
+    "OpenAI API",
+    "OpenRouter API",
+    "Convex",
+    "PostgreSQL",
+    "Supabase",
+    "MongoDB",
+    "MS-SQL",
+    "LLM Integration",
+    "Prompt Engineering",
+    "Agentic Workflows",
+    "RAG Pipelines",
+    "Vector Search",
+    "Git",
+    "Docker",
+    "Vercel",
+    "AWS",
+    "Google Cloud Platform",
+    "Linux",
+    "CI/CD",
   ],
   videos: [
     {
@@ -134,25 +158,51 @@ export const DATA = {
       },
     },
   },
+  work: [
+    {
+      company: "SpeedMVPs",
+      href: "https://speedmvps.com/",
+      badges: ["Remote"],
+      location: "Remote",
+      title: "Full-Stack Product Engineer (Core Team)",
+      logoUrl: "/images/speedmvps.png",
+      start: "Sept 2025",
+      end: "Present",
+      description:
+        "Sole architect and primary engineer for all high-complexity platform features — making system-design decisions, DB schema choices, and API contracts independently. Reduced feature delivery time by 60% through AI-augmented workflows (Cursor, Claude Dev, GitHub Copilot). Built and launched AiLeadz end-to-end — a B2B lead-gen SaaS with 250M+ verified contacts, AI-driven lead scoring, automated cold-email campaigns, and real-time analytics (featured on 47+ platforms, 4.9/5 rating). Engineered MaterialMate (M-Mate), an AI construction estimator integrating the Qwen2.5-VL vision model, a plumbing rules engine, and a PostgreSQL SKU matcher. Shipped MyClassGPT, an LLM-driven EdTech platform with a RAG pipeline serving contextual answers in under 1.5 seconds.",
+    },
+    {
+      company: "CodeBeautify",
+      href: "http://codebeautify.org/",
+      badges: [],
+      location: "Ahmedabad, India",
+      title: "Software Developer Intern",
+      logoUrl: "/images/codebeautify.png",
+      start: "2023",
+      end: "2024",
+      description:
+        "Optimized high-traffic developer utilities (JSON Formatter, XML Viewer, SQL Beautifier) used by thousands of developers globally — implementing performance improvements that measurably reduced page load times. Revamped UI/UX across multiple tools in collaboration with the design team, reducing user drop-off and improving overall task completion rates.",
+    },
+  ],
   education: [
     {
       school: "LJ University",
       href: "https://ljku.edu.in/",
-      degree: "Degree in Computer Science and Information Technology(*)",
+      degree: "Bachelor of Engineering — Computer Science (Lateral Entry via Diploma)",
       logoUrl: "/images/lju.png",
-      start: "2025",
-      end: "2028",
+      start: "2024",
+      end: "2027",
     },
     {
       school: "LJ University",
       href: "https://ljku.edu.in/",
-      degree: "Diploma in Computer Science and Information Technology",
+      degree: "Diploma — Computer Science",
       logoUrl: "/images/lju.png",
-      start: "2021",
+      start: "2022",
       end: "2024",
     },
     {
-      school: "Shree durga vidhya vihar",
+      school: "Shree Durga Vidhya Vihar",
       href: "https://www.durgaschool.com/",
       degree: "SSC Boards",
       logoUrl: "/images/durga.jpeg",
@@ -162,18 +212,98 @@ export const DATA = {
   ],
   projects: [
     {
-      title: "SwiftUI",
+      title: "AiLeadz",
+      href: "https://www.aileadz.io/",
+      dates: "Sept 2024 - Present",
+      active: true,
+      description:
+        "A live B2B lead-gen SaaS platform with 250M+ verified contacts, AI-driven lead scoring, automated cold-email campaigns, and real-time analytics. Featured on 47+ platforms with a 4.9/5 rating. Built end-to-end as the sole engineer responsible for all system-design and product decisions.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "FastAPI",
+        "PostgreSQL",
+        "Supabase",
+        "OpenAI API",
+        "TailwindCSS",
+        "Vercel",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://www.aileadz.io/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: AiLeadMac,
+      video: "",
+    },
+    {
+      title: "MaterialMate (M-Mate)",
+      href: "https://speedmvps.com/",
+      dates: "2025 - Present",
+      active: true,
+      description:
+        "An AI construction estimator integrating the Qwen2.5-VL vision model, an AS/NZS 3500 plumbing rules engine, and a PostgreSQL SKU matcher — achieving 10–15% accuracy delta vs. licensed plumber benchmarks. Stack: Python, FastAPI, Next.js 15, Supabase, OpenRouter API.",
+      technologies: [
+        "Python",
+        "FastAPI",
+        "Next.js",
+        "Supabase",
+        "PostgreSQL",
+        "OpenRouter API",
+        "Qwen2.5-VL",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://speedmvps.com/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: MMateMac,
+      video: "",
+    },
+    {
+      title: "MyClassGPT",
+      href: "https://www.myclassgpt.com/",
+      dates: "2024 - Present",
+      active: true,
+      description:
+        "An LLM-driven EdTech platform delivering NEP-aligned, region-specific learning in India. Designed the RAG pipeline serving contextual answers with citations in under 1.5 seconds.",
+      technologies: [
+        "Next.js",
+        "TypeScript",
+        "OpenAI API",
+        "RAG Pipeline",
+        "Vector Search",
+        "TailwindCSS",
+        "Supabase",
+      ],
+      links: [
+        {
+          type: "Website",
+          href: "https://www.myclassgpt.com/",
+          icon: <Icons.globe className="size-3" />,
+        },
+      ],
+      image: MyClassMac,
+      video: "",
+    },
+    {
+      title: "SwiftUI — UI Component Library",
       href: "https://swiftui.vercel.app/",
       dates: "March 2025 - Ongoing",
       active: true,
       description:
-        "A UI component library inspired by AceternityUI, designed to help developers create beautiful and interactive user interfaces with ease. It features a wide range of components, animations, and utilities that can be easily integrated into any Next.js project.",
+        "A library of 100+ production-ready, fully responsive UI components for React and Next.js with dark/light theming, WCAG accessibility compliance, and optimized bundle size via tree-shaking. Integrated GSAP and Framer Motion for declarative micro-animations and page transitions.",
       technologies: [
         "Next.js",
-        "TailwindCSS",
-        "Framer-motion",
         "TypeScript",
-        "shadcnUI",
+        "TailwindCSS",
+        "Framer Motion",
+        "GSAP",
+        "shadcn/ui",
         "Vercel",
       ],
       links: [
@@ -212,12 +342,12 @@ export const DATA = {
       links: [
         {
           type: "Website",
-          href: "https://www.wallpaperz.in/",
+          href: "https://www.dr-job.vercel.app/",
           icon: <Icons.globe className="size-3" />,
         },
         {
           type: "Source",
-          href: "https://github.com/StarKnightt/wallpaperz",
+          href: "https://github.com/karan9m/dr.job",
           icon: <Icons.github className="size-3" />,
         },
       ],
@@ -257,20 +387,18 @@ export const DATA = {
       video: "",
     },
     {
-      title: "Smart notes",
+      title: "SmartNotes — AI Note-Taking App",
       href: "https://smrtnotes.vercel.app/",
       dates: "April 2024 - September 2024",
       active: true,
       description:
-        "Smart Notes is an AI-powered note-taking application utilizing Retrieval-Augmented Generation (RAG) to help users efficiently organize, search, and generate content from their notes. It enables intelligent retrieval of information and provides contextual suggestions, making knowledge management seamless and interactive.",
+        "A full-stack collaborative note-taking app with real-time multi-user editing, GPT-driven summarization, vector-based semantic search, and a hierarchical tagging system. Built with Convex as a reactive serverless backend for real-time data sync and event-driven functions, eliminating the need for a dedicated WebSocket server.",
       technologies: [
-        "React.js",
-        "Octokit",
-        "Rest API",
+        "TypeScript",
+        "OpenAI API",
+        "Convex",
         "TailwindCSS",
-        "react-icons",
-        "react-router-dom",
-        "Vite",
+        "Next.js",
       ],
       links: [
         {

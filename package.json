@@ -41,6 +41,7 @@
     "next-view-transitions": "^0.3.4",
     "posthog-node": "^4.14.0",
     "react": "^18",
+    "react-activity-calendar": "^3.1.1",
     "react-dom": "^18",
     "react-github-calendar": "^4.5.1",
     "react-i18next": "^15.4.0",
