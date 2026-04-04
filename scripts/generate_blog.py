@@ -2,7 +2,7 @@
 """
 Auto Blog Generator for mekaran.vercel.app
 Fetches top tech news from RSS feeds → generates a blog post in Karan's style
-using Gemini Flash (free) → commits MDX to the repo.
+using Groq (free, fast) → commits MDX to the repo.
 Runs via GitHub Actions twice daily.
 """
 
@@ -10,22 +10,30 @@ import os
 import json
 import re
 import sys
+import time
 import hashlib
 import textwrap
 from datetime import datetime, timezone
 from pathlib import Path
 
 import feedparser
-import google.generativeai as genai
 import requests
+from groq import Groq
 
 # ── Configuration ─────────────────────────────────────────────────────────────
 
-GEMINI_API_KEY   = os.environ["GEMINI_API_KEY"]
+GROQ_API_KEY     = os.environ["GROQ_API_KEY"]
 UNSPLASH_API_KEY = os.environ.get("UNSPLASH_ACCESS_KEY", "")  # optional
 
-CONTENT_DIR   = Path(__file__).parent.parent / "content"
-TRACKER_FILE  = Path(__file__).parent / "posted_slugs.json"
+CONTENT_DIR  = Path(__file__).parent.parent / "content"
+TRACKER_FILE = Path(__file__).parent / "posted_slugs.json"
+
+# Groq models to try in order (first available/non-exhausted wins)
+MODELS = [
+    "llama-3.3-70b-versatile",   # Primary — best quality free model
+    "llama3-70b-8192",           # Fallback 1
+    "mixtral-8x7b-32768",        # Fallback 2
+]
 
 # RSS feeds to monitor (public, no auth needed)
 RSS_FEEDS = [
@@ -39,7 +47,7 @@ RSS_FEEDS = [
     "https://dev.to/feed",                           # dev.to
 ]
 
-# ── Karan's writing style (few-shot examples fed to Gemini) ───────────────────
+# ── Karan's writing style (few-shot examples fed to Groq) ─────────────────────
 
 STYLE_EXAMPLES = """
 EXAMPLE POST 1 — casual tech explainer:
@@ -109,7 +117,7 @@ def slugify(title: str) -> str:
     return title[:80]
 
 
-def fetch_top_articles(posted_slugs: set) -> list[dict]:
+def fetch_top_articles(posted_slugs: set) -> list:
     """Pull articles from all RSS feeds, filter out already-posted ones."""
     articles = []
     for url in RSS_FEEDS:
@@ -126,7 +134,7 @@ def fetch_top_articles(posted_slugs: set) -> list[dict]:
                     continue
                 articles.append({
                     "title":   title,
-                    "summary": summary[:800],   # trim for prompt
+                    "summary": summary[:800],
                     "link":    link,
                     "slug":    slug,
                     "source":  feed.feed.get("title", url),
@@ -136,7 +144,7 @@ def fetch_top_articles(posted_slugs: set) -> list[dict]:
     return articles
 
 
-def pick_best_article(articles: list[dict]) -> dict | None:
+def pick_best_article(articles: list) -> dict:
     """Score articles by keyword relevance to tech/dev topics."""
     KEYWORDS = [
         "ai", "developer", "javascript", "python", "react", "nextjs", "web",
@@ -152,13 +160,12 @@ def pick_best_article(articles: list[dict]) -> dict | None:
     return best
 
 
-def generate_blog_with_gemini(article: dict) -> tuple[str, str, str, list[str]]:
+def generate_blog_with_groq(article: dict) -> tuple:
     """
-    Calls Gemini Flash to write the blog.
+    Calls Groq to write the blog, with automatic model fallback.
     Returns (title, summary, body_markdown, tags).
     """
-    genai.configure(api_key=GEMINI_API_KEY)
-    model = genai.GenerativeModel("gemini-1.5-flash-latest")
+    client = Groq(api_key=GROQ_API_KEY)
 
     prompt = textwrap.dedent(f"""
         You are writing a tech blog post exactly in the style of Karan Mavadiya,
@@ -175,22 +182,68 @@ def generate_blog_with_gemini(article: dict) -> tuple[str, str, str, list[str]]:
         SOURCE:         {article['source']} ({article['link']})
 
         REQUIREMENTS:
-        - Write in Karan's casual, friendly, first-person style (use "I", "Hey there!", emojis ✅)
-        - Between 500–900 words
+        - Write in Karan's casual, friendly, first-person style (use "I", "Hey there!", emojis)
+        - Between 500-900 words
         - Use markdown headings (##, ###)
         - Include a short personal opinion section
         - End with a "Conclusion" or "TL;DR" section
         - At the very end, add "Source: [{article['source']}]({article['link']})"
-        - Add a line "Tags: tag1, tag2, tag3, tag4" at the very bottom (comma-separated, max 5 tags, no #)
-        - Do NOT add YAML frontmatter — just write the markdown body starting with a # heading
+        - Add a line "Tags: tag1, tag2, tag3, tag4" at the very bottom (comma-separated, max 5)
+        - Do NOT add YAML frontmatter — write the markdown body starting with a # heading
         - The first line must be the H1 title (creative, not just copying the source title)
         - Second line should be a brief tagline in italics
 
         Return ONLY the markdown, nothing else.
     """)
 
-    response = model.generate_content(prompt)
-    raw = response.text.strip()
+    raw = ""
+
+    for model_name in MODELS:
+        print(f"🤖  Trying model: {model_name}")
+
+        for attempt in range(3):
+            try:
+                response = client.chat.completions.create(
+                    model=model_name,
+                    messages=[{"role": "user", "content": prompt}],
+                    max_tokens=1500,
+                )
+                raw = response.choices[0].message.content.strip()
+                print(f"✅  Success with model: {model_name}")
+                break  # Inner loop — generation succeeded
+
+            except Exception as e:
+                err_str = str(e)
+
+                # Rate limit → retry with backoff
+                if "429" in err_str or "rate" in err_str.lower() or "quota" in err_str.lower():
+                    if attempt < 2:
+                        wait = 30 * (attempt + 1)
+                        print(f"⏳  Rate-limited on {model_name}, waiting {wait}s (retry {attempt + 2}/3)...")
+                        time.sleep(wait)
+                    else:
+                        print(f"⚠️   Rate limit persists for {model_name}, moving to next model...")
+                        break
+
+                # Model not found / decommissioned → skip immediately
+                elif "404" in err_str or "not found" in err_str.lower() or "decommissioned" in err_str.lower():
+                    print(f"⚠️   Model {model_name} unavailable, moving to next model...")
+                    break
+
+                # Unknown error → raise immediately
+                else:
+                    raise
+
+        if raw:
+            break  # Outer loop — we have a result
+
+    if not raw:
+        raise Exception(
+            "❌  All Groq models exhausted or unavailable.\n"
+            "    Check your API key or rate limits at: https://console.groq.com"
+        )
+
+    # ── Parse the response ─────────────────────────────────────────────────────
 
     # Extract tags line
     tags = ["tech", "webdev", "programming"]
@@ -200,20 +253,20 @@ def generate_blog_with_gemini(article: dict) -> tuple[str, str, str, list[str]]:
         raw = re.sub(r"^Tags?:.+$\n?", "", raw, flags=re.MULTILINE | re.IGNORECASE).strip()
 
     # Extract H1 as the title
-    h1_match = re.match(r"^#\s+(.+)$", raw, re.MULTILINE)
+    h1_match = re.search(r"^#\s+(.+)$", raw, re.MULTILINE)
     generated_title = h1_match.group(1).strip() if h1_match else article["title"]
 
-    # Generate a one-sentence summary from the first non-heading paragraph
+    # Auto-generate summary from first non-heading paragraph
     lines = [l for l in raw.split("\n") if l.strip() and not l.startswith("#")]
     auto_summary = (lines[0][:160] + "...") if lines else f"Karan's take on {article['title']}"
-    # Strip markdown italics for summary
     auto_summary = re.sub(r"[*_]", "", auto_summary)
 
     return generated_title, auto_summary, raw, tags
 
 
 def fetch_unsplash_image(query: str) -> str:
-    """Returns an Unsplash photo URL or empty string if key not set."""
+    print(f"🔑  Unsplash key: {'SET' if UNSPLASH_API_KEY else 'MISSING'}")
+    print(f"🔍  Searching Unsplash for: {query}")
     if not UNSPLASH_API_KEY:
         return ""
     try:
@@ -223,6 +276,8 @@ def fetch_unsplash_image(query: str) -> str:
             headers={"Authorization": f"Client-ID {UNSPLASH_API_KEY}"},
             timeout=10,
         )
+        print(f"📡  Unsplash status: {r.status_code}")
+        print(f"📦  Unsplash response: {r.text[:300]}")   # first 300 chars
         data = r.json()
         return data.get("urls", {}).get("regular", "")
     except Exception as e:
@@ -231,21 +286,27 @@ def fetch_unsplash_image(query: str) -> str:
 
 
 def write_mdx(slug: str, title: str, summary: str, body: str,
-              tags: list[str], image_url: str) -> Path:
+              tags: list, image_url: str) -> Path:
     """Write the final .mdx file to the content directory."""
     date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
-    image_field = f'image: "{image_url}"\n' if image_url else ""
-    tags_yaml   = json.dumps(tags)
+    # Build frontmatter lines individually — avoids indentation bugs
+    fm_lines = [
+        "---",
+        f'title: "{title.replace(chr(34), chr(39))}"',
+        f'publishedAt: "{date_str}"',
+        f'summary: "{summary.replace(chr(34), chr(39))}"',
+    ]
+    if image_url:
+        fm_lines.append(f'image: "{image_url}"')
+    fm_lines.append(f'tags: {json.dumps(tags)}')
+    fm_lines.append("---")
 
-    frontmatter = textwrap.dedent(f"""\
-        ---
-        title: "{title.replace('"', "'")}"
-        publishedAt: "{date_str}"
-        summary: "{summary.replace('"', "'")}"
-        {image_field}tags: {tags_yaml}
-        ---
-    """).strip()
+    frontmatter = "\n".join(fm_lines)
+    
+    # Inject the image into the markdown body (right below the H1 or at the top)
+    if image_url:
+        body = f"![Cover Image]({image_url})\n\n" + body
 
     mdx_content = frontmatter + "\n\n" + body + "\n"
 
@@ -276,14 +337,13 @@ def main():
         sys.exit(0)
 
     print(f"✍️   Generating blog for: {article['title']}")
-    title, summary, body, tags = generate_blog_with_gemini(article)
+    title, summary, body, tags = generate_blog_with_groq(article)
 
-    # Use the first tag as the Unsplash search query
     image_url = fetch_unsplash_image(tags[0] if tags else "technology")
 
     slug = slugify(title)
 
-    # Avoid collisions
+    # Avoid filename collisions
     if (CONTENT_DIR / f"{slug}.mdx").exists():
         slug = slug + "-" + hashlib.md5(article["link"].encode()).hexdigest()[:6]
 
@@ -292,7 +352,6 @@ def main():
     posted_slugs.add(article["slug"])
     save_posted_slugs(posted_slugs)
 
-    # Output slug for the GitHub Action to use in the commit message
     print(f"::set-output name=slug::{slug}")
     print(f"::set-output name=title::{title}")
 
