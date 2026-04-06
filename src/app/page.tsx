@@ -57,16 +57,7 @@ const BlogCard = dynamic(
   }
 );
 
-const GithubContributions = dynamic(
-  () =>
-    import("@/components/github-calendar").then(
-      (mod) => mod.GithubContributions
-    ),
-  {
-    ssr: false,
-    loading: () => <GithubSkeleton />,
-  }
-);
+import { GithubContributionsClient } from "@/components/github-contributions-client";
 
 const ProjectCardDynamic = dynamic(
   () => import("@/components/project-card").then((mod) => mod.ProjectCard),
@@ -242,7 +233,7 @@ export default function Page() {
           <section id="contributions">
             <BlurFade delay={BLUR_FADE_DELAY * 10}>
               <h2 className="text-xl font-bold">GitHub Contributions</h2>
-              <GithubContributions />
+              <GithubContributionsClient />
             </BlurFade>
           </section>
 
