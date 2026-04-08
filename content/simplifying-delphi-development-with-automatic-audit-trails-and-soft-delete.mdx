@@ -1,0 +1,56 @@
+---
+title: "Simplifying Delphi Development with Automatic Audit Trails and Soft Delete"
+publishedAt: "2026-04-08"
+summary: "Making life easier for Delphi devs, one feature at a time ..."
+image: "https://images.unsplash.com/photo-1677742332159-a6f44d3c8a8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzU2NjE1NDN8&ixlib=rb-4.1.0&q=80&w=1080"
+tags: ["delphi", "trysil", "audit trails", "soft delete", "orm"]
+---
+
+![Cover Image](https://images.unsplash.com/photo-1677742332159-a6f44d3c8a8b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzU2NjE1NDN8&ixlib=rb-4.1.0&q=80&w=1080)
+
+# Simplifying Delphi Development with Automatic Audit Trails and Soft Delete
+_*Making life easier for Delphi devs, one feature at a time*_ 
+
+Hey there! I'm Karan, and today I want to talk about something that's been a game-changer for me as a full-stack product engineer: automatic audit trails and soft delete in Delphi. 🤔
+
+## The Problem
+We've all been there - most ORMs handle INSERT, UPDATE, and DELETE well, but when you need to track who changed a record and when, or keep deleted records around instead of erasing them, you're usually on your own. This can lead to writing triggers, adding boilerplate to every repository method, or bolting on an external audit library. Not fun. 😬
+
+## Introducing Trysil
+Luckily, there's a solution that makes this process a whole lot easier: Trysil, an open-source ORM for Delphi. With Trysil, you can add an attribute to your entity, and the framework handles the rest. No base class to inherit, no interface to implement, no code to write beyond the attribute itself. It's like having your own personal assistant, but instead of getting you coffee, it handles your audit trails and soft deletes. ☕️
+
+### How it Works
+Let's take a look at an example. Consider a typical entity:
+```delphi
+type
+  TMyEntity = class
+  private
+    FName: string;
+    FDescription: string;
+  public
+    property Name: string read FName write FName;
+    property Description: string read FDescription write FDescription;
+  end;
+```
+With Trysil, you can add an attribute to this entity to enable automatic audit trails and soft delete:
+```delphi
+type
+  TMyEntity = class
+  private
+    FName: string;
+    FDescription: string;
+  public
+    property Name: string read FName write FName;
+    property Description: string read FDescription write FDescription;
+  end;
+  [AuditTrail]
+  [SoftDelete]
+```
+And that's it! Trysil will take care of the rest, automatically tracking changes to your entity and keeping deleted records around for you to retrieve later.
+
+## My Take
+As someone who's worked with Delphi for a while, I can honestly say that Trysil is a total lifesaver. I've spent way too many hours writing boilerplate code and debugging triggers, and it's amazing to have a solution that just works. 🙌
+
+## Conclusion
+In conclusion, automatic audit trails and soft delete in Delphi with Trysil are a total game-changer. It's easy to use, efficient, and saves you a ton of time and effort. So why not give it a try? Start using Trysil today and see the difference for yourself. 🚀
+Source: [DEV Community](https://dev.to/davidlastrucci/automatic-audit-trails-and-soft-delete-in-delphi-with-trysil-4fci)
