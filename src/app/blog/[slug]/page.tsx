@@ -1,5 +1,6 @@
 import { BlogInteractions } from "@/components/blog-interactions";
-import { getBlogPosts, getPost } from "@/data/blog";
+import { getBlogPosts } from "@/data/blog";
+import { getPost } from "@/data/blog-post";
 import { DATA } from "@/data/resume";
 import { formatDate } from "@/lib/utils";
 import type { Metadata } from "next";
