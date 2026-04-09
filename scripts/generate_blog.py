@@ -12,6 +12,7 @@ import re
 import sys
 import time
 import hashlib
+import uuid
 import textwrap
 from datetime import datetime, timezone
 from pathlib import Path
@@ -285,6 +286,115 @@ def fetch_unsplash_image(query: str) -> str:
         return ""
 
 
+def github_output_set(name: str, value: str) -> None:
+    """Write a step output for GitHub Actions (replaces deprecated ::set-output)."""
+    path = os.environ.get("GITHUB_OUTPUT")
+    if not path:
+        return
+    delim = f"DELIM_{uuid.uuid4().hex}"
+    with open(path, "a", encoding="utf-8") as fh:
+        fh.write(f"{name}<<{delim}\n{value}\n{delim}\n")
+
+
+def telegram_escape(text: str) -> str:
+    return (
+        text.replace("&", "&amp;")
+        .replace("<", "&lt;")
+        .replace(">", "&gt;")
+    )
+
+
+def telegram_href(url: str) -> str:
+    """Escape & for Telegram HTML <a href=\"...\"> attributes."""
+    return url.replace("&", "&amp;")
+
+
+def send_telegram_blog_notification(
+    *,
+    title: str,
+    slug: str,
+    summary: str,
+    tags: list,
+    image_url: str,
+    source: dict,
+    published_date: str,
+    post_url: str,
+) -> None:
+    """
+    Notify via Telegram Bot API when TELEGRAM_BOT_TOKEN and TELEGRAM_CHAT_ID are set.
+    Create a bot with @BotFather; chat_id is your user id or channel id (use @userinfobot).
+    """
+    token = os.environ.get("TELEGRAM_BOT_TOKEN", "").strip()
+    chat_id = os.environ.get("TELEGRAM_CHAT_ID", "").strip()
+    if not token or not chat_id:
+        print(
+            "ℹ️   TELEGRAM_BOT_TOKEN / TELEGRAM_CHAT_ID not set — skipping Telegram."
+        )
+        return
+
+    te = telegram_escape
+    tags_s = ", ".join(tags) if tags else "—"
+    src_title = source.get("title", "")
+    src_link = source.get("link", "")
+    src_name = source.get("source", "")
+
+    hu = telegram_href
+    if image_url:
+        cover_line = f'<b>Cover image:</b> <a href="{hu(image_url)}">open image</a>'
+    else:
+        cover_line = "<b>Cover image:</b> —"
+
+    lines = [
+        "📝 <b>New auto-blog published</b>",
+        "",
+        f"<b>Title:</b> {te(title)}",
+        f"<b>Slug:</b> <code>{te(slug)}</code>",
+        f"<b>Published:</b> {te(published_date)}",
+        f'<b>URL:</b> <a href="{hu(post_url)}">{te(post_url)}</a>',
+        "",
+        "<b>Summary:</b>",
+        te(summary[:1200]) + ("…" if len(summary) > 1200 else ""),
+        "",
+        f"<b>Tags:</b> {te(tags_s)}",
+        "",
+        f"<b>Source feed / site:</b> {te(src_name)}",
+        f'<b>Source article:</b> <a href="{hu(src_link)}">{te(src_title)}</a>',
+        "",
+        cover_line,
+    ]
+
+    repo = os.environ.get("GITHUB_REPOSITORY", "").strip()
+    run_id = os.environ.get("GITHUB_RUN_ID", "").strip()
+    server = os.environ.get("GITHUB_SERVER_URL", "https://github.com").rstrip("/")
+    if repo and run_id:
+        run_url = f"{server}/{repo}/actions/runs/{run_id}"
+        lines.extend(
+            ["", f'<b>GitHub Actions run:</b> <a href="{hu(run_url)}">{te(run_url)}</a>']
+        )
+    text = "\n".join(lines)
+    if len(text) > 4000:
+        text = text[:3990] + "\n…"
+
+    url = f"https://api.telegram.org/bot{token}/sendMessage"
+    try:
+        r = requests.post(
+            url,
+            json={
+                "chat_id": chat_id,
+                "text": text,
+                "parse_mode": "HTML",
+                "disable_web_page_preview": False,
+            },
+            timeout=30,
+        )
+        if not r.ok:
+            print(f"⚠️   Telegram API error {r.status_code}: {r.text[:500]}")
+        else:
+            print("✅  Telegram notification sent.")
+    except Exception as e:
+        print(f"⚠️   Telegram send failed: {e}")
+
+
 def write_mdx(slug: str, title: str, summary: str, body: str,
               tags: list, image_url: str) -> Path:
     """Write the final .mdx file to the content directory."""
@@ -352,8 +462,23 @@ def main():
     posted_slugs.add(article["slug"])
     save_posted_slugs(posted_slugs)
 
-    print(f"::set-output name=slug::{slug}")
-    print(f"::set-output name=title::{title}")
+    site_url = os.environ.get("SITE_URL", "https://mekaran.vercel.app").rstrip("/")
+    post_url = f"{site_url}/blog/{slug}"
+    date_str = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    send_telegram_blog_notification(
+        title=title,
+        slug=slug,
+        summary=summary,
+        tags=tags,
+        image_url=image_url,
+        source=article,
+        published_date=date_str,
+        post_url=post_url,
+    )
+
+    github_output_set("slug", slug)
+    github_output_set("title", title)
 
 
 if __name__ == "__main__":
