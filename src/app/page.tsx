@@ -5,7 +5,7 @@ import { ProjectCard } from "@/components/project-card";
 import { ResumeCard } from "@/components/resume-card";
 import { PersonSchema } from "@/components/schema/person-schema";
 import { BlogSkeleton } from "@/components/skeletons/blog-skeleton";
-import { GithubSkeleton } from "@/components/skeletons/github-skeleton";
+import { GithubContributionsDynamic } from "@/components/github-contributions-dynamic";
 import { HackathonSkeleton } from "@/components/skeletons/hackathon-skeleton";
 import { ProjectSkeleton } from "@/components/skeletons/project-skeleton";
 import { SocialIconLink } from "@/components/social-icon-link";
@@ -54,17 +54,6 @@ const BlogCard = dynamic(
   {
     ssr: true,
     loading: () => <BlogSkeleton />,
-  }
-);
-
-const GithubContributions = dynamic(
-  () =>
-    import("@/components/github-calendar").then(
-      (mod) => mod.GithubContributions
-    ),
-  {
-    ssr: false,
-    loading: () => <GithubSkeleton />,
   }
 );
 
@@ -242,7 +231,7 @@ export default function Page() {
           <section id="contributions">
             <BlurFade delay={BLUR_FADE_DELAY * 10}>
               <h2 className="text-xl font-bold">GitHub Contributions</h2>
-              <GithubContributions />
+              <GithubContributionsDynamic />
             </BlurFade>
           </section>
 

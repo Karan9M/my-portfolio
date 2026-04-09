@@ -1,13 +1,14 @@
 // components/social-icon-link.tsx
 'use client';
 
+import type { ReactElement } from 'react';
 import BlurFade from './magicui/blur-fade';
 import Link from 'next/link';
 
 type SocialIconLinkProps = {
   name: string;
   url: string;
-  icon: JSX.Element;
+  icon: ReactElement;
   delay: number;
   color?: string;
 };
