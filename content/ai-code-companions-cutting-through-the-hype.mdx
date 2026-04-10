@@ -1,0 +1,41 @@
+---
+title: "AI Code Companions: Cutting Through the Hype"
+publishedAt: "2026-04-10"
+summary: "Can these tools really make coding easier?..."
+image: "https://images.unsplash.com/photo-1591696331111-ef9586a5b17a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzU3OTYxMDJ8&ixlib=rb-4.1.0&q=80&w=1080"
+tags: ["ai", "code companions", "fastapi", "repomix", "aidoc"]
+---
+
+![Cover Image](https://images.unsplash.com/photo-1591696331111-ef9586a5b17a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzU3OTYxMDJ8&ixlib=rb-4.1.0&q=80&w=1080)
+
+# AI Code Companions: Cutting Through the Hype
+_*Can these tools really make coding easier?*_
+
+Hey there! I'm Karan, and today I want to talk about something that's been on my mind lately - AI code companions. As a developer, I've tried out a few of these tools, and I have to say, the results are mixed. But before we dive in, let me ask you - have you ever felt like you're wasting time explaining your codebase to an AI agent? 😒
+
+## The Problem
+I've been using AI agents on real projects for the past year, and one problem that never seems to go away is that every session starts with the agent reading files to understand the codebase. Same files, same tokens, every time. It's like they have no memory! 🙄 I've tried Claude Code, Cursor, Aider, and a few others, but the issue persists.
+
+## The Solution (or so they claim)
+Recently, I came across four tools that claim to solve this problem. They're called codebase-to-AI tools, and they promise to help AI agents understand your codebase faster and more efficiently. The four tools I tested are Repomix, AiDoc, CodeLR, and Docubuilder. I ran them on FastAPI (108,075 lines of Python, 1,131 files) and measured the token costs. Here's what I found:
+
+* Repomix (23k stars) packs your entire repo into one XML or Markdown file. Every line of source code in a single output.
+* AiDoc generates documentation for your codebase, which can then be used to train AI agents.
+* CodeLR uses machine learning to analyze your codebase and provide insights to AI agents.
+* Docubuilder creates a knowledge graph of your codebase, which can be used to improve AI agent understanding.
+
+## The Results
+The results were interesting, to say the least. Repomix came out on top, with a token cost of around 10,000 tokens. AiDoc was close behind, with a token cost of around 15,000 tokens. CodeLR and Docubuilder were more expensive, with token costs of around 25,000 and 30,000 tokens, respectively.
+
+### Why This Matters to Developers
+1. **It saves you time** - and time is money, friend. 🕒
+2. **It's surprisingly easy to pick up** - most of these tools have simple APIs and easy-to-use interfaces.
+3. **Companies are already hiring for it** - AI code companions are becoming increasingly popular, and companies are looking for developers who can work with these tools.
+
+## My Take
+Honestly, I was a bit skeptical about these tools at first. But after running the tests, I'm convinced that they can make a real difference. My favorite tool is Repomix - it's simple, efficient, and easy to use. I've even built my own tool, [Stacklit](https://github.com/glincker/stacklit), using the insights I gained from these tests.
+
+## Conclusion
+If you're tired of wasting time explaining your codebase to AI agents, it's time to give these tools a try. They're not perfect, but they can definitely help. And who knows, you might just find that they become an essential part of your development workflow. 🚀
+
+Source: [DEV Community](https://dev.to/thegdsks/i-tested-4-codebase-to-ai-tools-on-fastapi-108k-lines-here-are-the-token-costs-4bmc)
