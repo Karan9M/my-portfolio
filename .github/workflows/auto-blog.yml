@@ -32,6 +32,20 @@ jobs:
       - name: 📦 Install dependencies
         run: pip install -r scripts/requirements.txt
 
+      - name: 📡 Telegram smoke test (optional)
+        env:
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+        run: |
+          if [ -z "$TELEGRAM_BOT_TOKEN" ] || [ -z "$TELEGRAM_CHAT_ID" ]; then
+            echo "Telegram secrets missing, skipping smoke test."
+            exit 0
+          fi
+          RESP=$(curl -s "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            -d "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=✅ Auto-blog Telegram integration is configured.")
+          echo "$RESP" | python -c "import json,sys; d=json.load(sys.stdin); print(d); exit(0 if d.get('ok') else 1)"
+
       # Optional: TELEGRAM_BOT_TOKEN + TELEGRAM_CHAT_ID → notify on each new post (see scripts/generate_blog.py)
       # Optional: SITE_URL → public blog base (default https://mekaran.vercel.app)
       - name: ✍️ Generate blog post

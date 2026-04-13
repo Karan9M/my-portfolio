@@ -344,6 +344,13 @@ def send_telegram_blog_notification(
     else:
         cover_line = "<b>Cover image:</b> —"
 
+    if src_link and src_link.startswith(("http://", "https://")):
+        source_article_line = f'<b>Source article:</b> <a href="{hu(src_link)}">{te(src_title or src_link)}</a>'
+    elif src_title:
+        source_article_line = f"<b>Source article:</b> {te(src_title)}"
+    else:
+        source_article_line = "<b>Source article:</b> —"
+
     lines = [
         "📝 <b>New auto-blog published</b>",
         "",
@@ -358,7 +365,7 @@ def send_telegram_blog_notification(
         f"<b>Tags:</b> {te(tags_s)}",
         "",
         f"<b>Source feed / site:</b> {te(src_name)}",
-        f'<b>Source article:</b> <a href="{hu(src_link)}">{te(src_title)}</a>',
+        source_article_line,
         "",
         cover_line,
     ]
@@ -389,6 +396,21 @@ def send_telegram_blog_notification(
         )
         if not r.ok:
             print(f"⚠️   Telegram API error {r.status_code}: {r.text[:500]}")
+            # Fallback to plain text when HTML parsing/link validation fails.
+            plain_text = re.sub(r"<[^>]+>", "", text)
+            fallback = requests.post(
+                url,
+                json={
+                    "chat_id": chat_id,
+                    "text": plain_text[:3800],
+                    "disable_web_page_preview": False,
+                },
+                timeout=30,
+            )
+            if fallback.ok:
+                print("✅  Telegram fallback (plain text) sent.")
+            else:
+                print(f"⚠️   Telegram fallback failed {fallback.status_code}: {fallback.text[:500]}")
         else:
             print("✅  Telegram notification sent.")
     except Exception as e:
