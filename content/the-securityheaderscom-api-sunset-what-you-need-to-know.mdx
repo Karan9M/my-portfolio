@@ -1,0 +1,62 @@
+---
+title: "The SecurityHeaders.com API Sunset: What You Need to Know 🌅"
+publishedAt: "2026-04-24"
+summary: "Don't let your security headers go dark - migrate now!..."
+image: "https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzcwNDM2NTh8&ixlib=rb-4.1.0&q=80&w=1080"
+tags: ["security", "web development", "api", "migration"]
+---
+
+![Cover Image](https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3NzcwNDM2NTh8&ixlib=rb-4.1.0&q=80&w=1080)
+
+# The SecurityHeaders.com API Sunset: What You Need to Know 🌅
+_*Don't let your security headers go dark - migrate now!*_
+
+Hey there! I'm Karan, and today I want to talk about something that's got the security community buzzing - the discontinuation of the SecurityHeaders.com API. I know, I know, it's not the most exciting topic, but stick with me, because this affects you if you have CI/CD pipelines or scheduled audits built on `api.securityheaders.com`.
+
+## The Short Version
+The SecurityHeaders.com API has been discontinued, which means no new subscriptions or renewals are being issued. If your existing key expires, you'll be left with nowhere to go. But don't worry, I've got you covered. In this post, we'll explore why developers used the SecurityHeaders.com API in the first place, and more importantly, how to migrate your existing setup.
+
+### Why Developers Used It
+HTTP security headers are a crucial part of web application security. They help protect against various types of attacks, such as cross-site scripting (XSS) and cross-site request forgery (CSRF). The SecurityHeaders.com API made it easy to automate the process of checking and configuring these headers, which is why it was a popular choice among developers. With the API, you could easily integrate security header checks into your CI/CD pipelines, ensuring that your web applications were always secure.
+
+## The Impact of the API Discontinuation
+The discontinuation of the SecurityHeaders.com API means that you'll need to find an alternative solution for checking and configuring your security headers. If you're using the API in your CI/CD pipelines or scheduled audits, you'll need to migrate to a new solution before your existing key expires. This might seem like a hassle, but trust me, it's worth the effort. Security headers are an essential part of web application security, and you don't want to leave your applications vulnerable to attacks.
+
+## Migration Guide
+Migrating from the SecurityHeaders.com API to an alternative solution is relatively straightforward. Here's a step-by-step guide to help you get started:
+
+1. **Choose an alternative solution**: There are several alternative solutions available, such as OWASP ZAP or Burp Suite. Choose one that fits your needs and budget.
+2. **Update your CI/CD pipelines**: Update your CI/CD pipelines to use the new solution. This might involve updating your pipeline configuration or scripts.
+3. **Test your setup**: Test your new setup to ensure that it's working as expected.
+
+### Example Curl Commands
+Here are some example curl commands to help you get started with the migration:
+```bash
+# Old API
+curl -X GET 'https://api.securityheaders.com/scan?url=https://example.com'
+
+# New API (e.g. OWASP ZAP)
+curl -X GET 'http://zap:8080/JSON/core/scan/?url=https://example.com'
+```
+### GitHub Actions Workflow
+Here's an example GitHub Actions workflow that you can use as a starting point:
+```yml
+name: Security Header Scan
+on:
+  push:
+    branches:
+      - main
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Scan security headers
+        run: |
+          curl -X GET 'http://zap:8080/JSON/core/scan/?url=https://example.com'
+```
+## My Take
+I think the discontinuation of the SecurityHeaders.com API is a good opportunity for developers to re-evaluate their security header setup. While it might seem like a hassle to migrate to a new solution, it's a chance to improve your security posture and ensure that your web applications are protected against the latest threats.
+
+## Conclusion
+In conclusion, the SecurityHeaders.com API discontinuation is a significant change that affects developers who rely on the API for security header checks. However, with a little effort, you can migrate to an alternative solution and ensure that your web applications remain secure. Don't wait until it's too late - start your migration today! 🚀
+Source: [DEV Community](https://dev.to/guardr/securityheaderscom-api-is-gone-heres-the-migration-4461)
