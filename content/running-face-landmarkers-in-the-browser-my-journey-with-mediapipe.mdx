@@ -1,0 +1,27 @@
+---
+title: "Running Face Landmarkers in the Browser: My Journey with MediaPipe"
+publishedAt: "2026-04-30"
+summary: "No build tools, no problem (or so I thought)..."
+tags: ["mediapipe", "face landmarker", "javascript", "webassembly", "facial analysis"]
+---
+
+# Running Face Landmarkers in the Browser: My Journey with MediaPipe
+_*No build tools, no problem (or so I thought)*_
+
+Hey there! I'm Karan, and today I want to talk about something that had me pulling my hair out for a week - getting MediaPipe Face Landmarker to run in the browser with zero build tools. 🤯 I know, I know, it sounds like a simple task, but trust me, it was a wild ride.
+
+## The Goal
+I've been fascinated by facial analysis and the possibilities it offers. When I stumbled upon facecalculators.com, a free, privacy-first face shape detector that runs entirely in the browser, I was impressed. No uploads, no server, no account - all facial analysis happens locally via WebAssembly, and nothing biometric ever leaves the device. I wanted to learn more about how it works and how I could use MediaPipe Face Landmarker in my own projects.
+
+## The Challenge
+The core of facecalculators.com is Google's MediaPipe Face Landmarker with the 478-point 3D model. Getting it working in a pure vanilla JavaScript environment, without a build tool, without React, and inside a WordPress theme, was not as straightforward as the docs make it look. I encountered several failure modes, from import issues to compatibility problems. It was like trying to solve a puzzle with missing pieces.
+
+### The Import Bug That Wasted My Week
+One of the biggest challenges I faced was an import bug that had me scratching my head for hours. I won't bore you with the details, but let's just say it was a frustrating experience. The solution, however, was surprisingly simple. By using the correct import syntax and configuring the module correctly, I was able to get MediaPipe Face Landmarker up and running in the browser.
+
+## My Take
+In my opinion, MediaPipe Face Landmarker is a powerful tool that offers a lot of possibilities for developers. However, the documentation could be improved to make it easier for beginners to get started. I think it's essential to have a good understanding of the underlying technology and the potential challenges that come with it. With the right knowledge and resources, anyone can use MediaPipe Face Landmarker to build innovative applications.
+
+## Conclusion
+If you're building anything with MediaPipe in the browser and not using a bundler, this article should save you some real hours of frustration. Remember, it's not just about getting the code to work; it's about understanding the technology and the potential pitfalls. So, don't be afraid to experiment and try new things. With persistence and patience, you can overcome any obstacle and build something amazing. 🚀
+Source: [DEV Community](https://dev.to/khan777/how-i-got-mediapipe-face-landmarker-running-in-the-browser-with-zero-build-tools-and-the-import-36b1)
