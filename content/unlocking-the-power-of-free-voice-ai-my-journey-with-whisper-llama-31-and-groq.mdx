@@ -1,0 +1,39 @@
+---
+title: "Unlocking the Power of Free Voice AI: My Journey with Whisper, LLaMA 3.1, and Groq"
+publishedAt: "2026-05-13"
+summary: "Building a complete Voice AI pipeline without breaking the bank ..."
+image: "https://images.unsplash.com/photo-1677442135703-1787eea5ce01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2NTA5NjZ8&ixlib=rb-4.1.0&q=80&w=1080"
+tags: ["ai", "voice ai", "whisper", "llama", "groq"]
+---
+
+![Cover Image](https://images.unsplash.com/photo-1677442135703-1787eea5ce01?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg2NTA5NjZ8&ixlib=rb-4.1.0&q=80&w=1080)
+
+# Unlocking the Power of Free Voice AI: My Journey with Whisper, LLaMA 3.1, and Groq
+*_Building a complete Voice AI pipeline without breaking the bank_* 
+
+Hey there! I'm Karan, and today I want to talk about something exciting that I came across recently. 🤔 I've been experimenting with Voice AI, and I stumbled upon an amazing project that uses Whisper, LLaMA 3.1, and Groq to build a free Voice AI pipeline. 
+
+## The Stack
+The project, called VoiceIQ, uses a combination of the following technologies to create a complete Voice AI pipeline:
+* Whisper Large V3 (via Groq API) for Speech to Text
+* LLaMA 3.1 8B Instant (via Groq API) as the Language Model
+* gTTS for Text to Speech
+* Streamlit for the Web UI
+
+I was impressed by the simplicity and effectiveness of this stack. The use of Groq API for Whisper and LLaMA 3.1 makes it easy to integrate these powerful models into the pipeline.
+
+### Conversation Memory: A Game-Changer
+One of the features that caught my attention was the Conversation Memory class. By default, every LLM call is stateless, which means that the model doesn't retain any information from previous conversations. The ConversationMemory class solves this problem by storing the last 8 turns of the conversation and passing the full history with every request. This feature makes the Voice AI pipeline much more engaging and useful.
+
+### Overcoming Challenges
+As with any project, there were some challenges to overcome. The developer encountered a issue when Groq deprecated the `llama3-8b-8192` model, which caused the app to throw a 400 error. The fix was simple - switching to the `llama-3.1-8b-instant` model. However, this experience highlights the importance of staying up-to-date with the latest developments and changes in the models and APIs used in the project.
+
+## My Take
+I must say that I'm impressed by the potential of this Voice AI pipeline. The use of free models and APIs makes it accessible to anyone who wants to experiment with Voice AI. The Conversation Memory feature is a great addition, and I can see many use cases where this feature would be extremely useful. 
+
+As someone who's worked with AI models before, I can appreciate the effort that goes into building a pipeline like this. It's not just about integrating the models and APIs; it's about creating a seamless experience for the user. The developer has done a great job of creating a user-friendly interface using Streamlit, which makes it easy to interact with the Voice AI pipeline.
+
+## Conclusion
+In conclusion, the VoiceIQ project is a great example of how to build a free Voice AI pipeline using Whisper, LLaMA 3.1, and Groq. The use of Conversation Memory and the simple yet effective stack make it a powerful tool for anyone looking to experiment with Voice AI. If you're interested in building your own Voice AI pipeline, I would definitely recommend checking out this project. 🚀
+
+Source: [DEV Community](https://dev.to/dubeyrock/how-i-built-a-free-voice-ai-pipeline-using-whisper-llama-31-groq-bhp)
