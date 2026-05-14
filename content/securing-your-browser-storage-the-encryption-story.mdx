@@ -1,0 +1,35 @@
+---
+title: "Securing Your Browser Storage: The Encryption Story 🚀"
+publishedAt: "2026-05-14"
+summary: "Because sensitive data deserves better than plaintext ..."
+image: "https://images.unsplash.com/photo-1563762270340-3f5fde3243cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg3MzczMTR8&ixlib=rb-4.1.0&q=80&w=1080"
+tags: ["browser storage", "encryption", "security", "tessera", "zero-dependency-library"]
+---
+
+![Cover Image](https://images.unsplash.com/photo-1563762270340-3f5fde3243cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzg3MzczMTR8&ixlib=rb-4.1.0&q=80&w=1080)
+
+# Securing Your Browser Storage: The Encryption Story 🚀
+_*Because sensitive data deserves better than plaintext*_ 
+
+Hey there! I'm Karan, and today I want to talk about something that's been on my mind lately - browser storage security. As developers, we often store sensitive user data in `localStorage`, `sessionStorage`, or `IndexedDB`, but have you ever stopped to think about how secure that data really is? 🤔
+
+## The Problem with Plaintext Storage
+I recently found myself in a situation where I was auditing a side project, and I realized that I was storing sensitive user preferences, cart data, and session tokens in `localStorage` - completely in plaintext. Anyone with DevTools open could read it in two seconds. I know, I know, it's a rookie mistake, but I'm sure I'm not the only one who's made it. 😊
+
+The obvious fix is "just encrypt it." But when I went looking for a library that actually did this well, I kept running into the same problems: heavy dependencies, weak key derivation, or APIs that felt bolted on as an afterthought. It was like trying to find a needle in a haystack, but the needle was a secure encryption library, and the haystack was a bunch of inadequate solutions. 🌾
+
+## Introducing Tessera: A Zero-Dependency Browser Storage Encryption Library
+That's when I stumbled upon [tessera](https://www.npmjs.com/package/@mrtinkz/tessera), a zero-dependency browser storage encryption library. One passcode, all your browser storage - `localStorage`, `sessionStorage`, `IndexedDB` - encrypted and secure. It's like having a superpower, but instead of flying or invisibility, you get to protect your users' sensitive data. 🦸‍♂️
+
+### How Tessera Works
+Tessera uses a simple and intuitive API to encrypt and decrypt your browser storage. You can use it to store sensitive data like user preferences, cart data, or session tokens, and rest assured that it's secure. The library uses a strong key derivation function to generate a unique key for each user, so you don't have to worry about weak keys or password cracking. 💪
+
+### Why Tessera Matters
+So, why does tessera matter? For one, it's easy to use. You don't need to be a cryptography expert to use it, and the API is simple and intuitive. Two, it's secure. Tessera uses strong encryption and key derivation to protect your users' sensitive data. And three, it's zero-dependency, so you don't have to worry about bloating your project with unnecessary dependencies. 🙅‍♂️
+
+## My Take
+As a developer, I think tessera is a game-changer. It's one of those libraries that makes you wonder how you ever managed without it. I mean, who doesn't want to protect their users' sensitive data? It's like having a security blanket, but instead of keeping you warm, it keeps your users' data safe. 🧸
+
+## Conclusion
+In conclusion, if you're storing sensitive user data in browser storage, you need to encrypt it. And if you're looking for a reliable and easy-to-use encryption library, tessera is the way to go. It's like having a superpower, but instead of flying or invisibility, you get to protect your users' sensitive data. So, what are you waiting for? Give tessera a try today! 🚀
+Source: [DEV Community](https://dev.to/mrtinkz/i-built-a-zero-dependency-browser-storage-encryption-library-heres-why-444l)
