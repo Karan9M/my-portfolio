@@ -1,0 +1,32 @@
+---
+title: "Zeroing in on Performance: The Power of Static Data in Chrome Extensions"
+publishedAt: "2026-05-23"
+summary: "Boosting speed without sacrificing reliability, one dataset at a time ..."
+image: "https://images.unsplash.com/photo-1739056238917-d89cd05c48d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzk1NDg4MjN8&ixlib=rb-4.1.0&q=80&w=1080"
+tags: ["chrome extensions", "static data", "performance optimization", "api calls", "development"]
+---
+
+![Cover Image](https://images.unsplash.com/photo-1739056238917-d89cd05c48d5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3Nzk1NDg4MjN8&ixlib=rb-4.1.0&q=80&w=1080)
+
+# Zeroing in on Performance: The Power of Static Data in Chrome Extensions
+*_Boosting speed without sacrificing reliability, one dataset at a time_* 
+
+Hey there! I'm Karan, and today I want to talk about something that caught my eye in the world of Chrome extensions. As developers, we're always looking for ways to optimize performance and improve user experience. Recently, I stumbled upon an interesting approach used by the EntryCheck extension, which bundles static data for visa requirements of over 190 countries directly into the extension. No API calls, no network requests - just instant lookups. 
+
+## The Problem with API Calls
+When building extensions that rely on external data, we often fall into two patterns: making API calls or storing small amounts of user-specific data locally. Both approaches have their drawbacks. API calls can be slow, unreliable, and dependent on external factors like network connectivity. Local storage, on the other hand, can be limited in scope and may not provide the most up-to-date information. 
+
+## Why Static Data Makes Sense
+So, why did the developers of EntryCheck choose to go with static data? It all comes down to the nature of the data itself. Visa requirements don't change often - a country might update its visa-on-arrival list only two or three times a year. This means that the data is relatively stable and can be safely bundled into the extension without worrying about it becoming outdated. By doing so, the extension can provide instant lookups without relying on API calls or network requests. 
+
+### The Benefits of Static Data
+1. **Lightning-fast lookups** - With the data bundled into the extension, lookups are instantaneous, providing a seamless user experience.
+2. **No API dependency** - The extension is no longer reliant on external APIs, which can be slow, unreliable, or even go offline.
+3. **Offline support** - Since the data is stored locally, the extension can still function even without an internet connection.
+
+## My Take
+As a developer, I have to say that I'm impressed by this approach. It's not always easy to determine when to use static data versus API calls, but in this case, it seems like the right call. The tradeoff between a larger bundle size and instant lookups is well worth it, especially considering the relatively slow pace of change in visa requirements. 
+
+## Conclusion
+In the end, the EntryCheck extension's approach to using static data is a great example of how to optimize performance and improve user experience. By understanding the nature of the data and making informed decisions about how to store and retrieve it, we can build faster, more reliable, and more efficient extensions. So, the next time you're building an extension that relies on external data, consider whether static data might be the way to go. 
+Source: [DEV Community](https://dev.to/ktg0215/190-countries-zero-api-calls-shipping-static-data-in-a-chrome-extension-597i)
