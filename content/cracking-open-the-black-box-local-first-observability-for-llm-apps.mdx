@@ -1,0 +1,36 @@
+---
+title: "Cracking Open the Black Box: Local-First Observability for LLM Apps"
+publishedAt: "2026-06-03"
+summary: "Unlocking the secrets of large language models, one span at a time..."
+image: "https://images.unsplash.com/photo-1725211756571-bf07e283465a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODA1MTEwNjh8&ixlib=rb-4.1.0&q=80&w=1080"
+tags: ["llms", "observability", "replay", "debugging", "ai"]
+---
+
+![Cover Image](https://images.unsplash.com/photo-1725211756571-bf07e283465a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODA1MTEwNjh8&ixlib=rb-4.1.0&q=80&w=1080)
+
+# Cracking Open the Black Box: Local-First Observability for LLM Apps
+_*Unlocking the secrets of large language models, one span at a time*_
+
+Hey there! I'm Karan, and today I want to talk about something that's been buzzing in the dev community - building Lookspan, a local-first observability and replay tool for apps that use large language models (LLMs). As someone who's worked with LLMs, I know how frustrating it can be to deal with the black box that is their internal workings.
+
+## The Problem with LLMs
+When your app calls an LLM, what actually happens is mostly a mystery: which prompt went out, what came back, which tools fired, and why the output changed between runs. Most observability stacks were built for plain HTTP services, not for the non-deterministic world of LLM calls. This lack of visibility can lead to debugging nightmares, wasted time, and a whole lot of frustration.
+
+## What Lookspan Does
+Lookspan is an attempt to crack open this black box and shed some light on what's happening inside. Here are some of the key features:
+* **Capture**: Lookspan captures spans/traces of your LLM calls - prompts, responses, tool calls. It's MCP-native, so it plugs into the ecosystem instead of locking you in.
+* **Replay & Diff**: Re-run a capture to see what happened, and diff the results to identify changes.
+
+### Why This Matters to Developers
+1. **It saves you time** - no more wasted hours trying to debug mysterious LLM issues.
+2. **It's surprisingly easy to pick up** - Lookspan is designed to be intuitive and easy to use, even for those new to LLMs.
+3. **Companies are already hiring for LLM expertise** - getting familiar with tools like Lookspan can give you a competitive edge in the job market.
+
+## My Take
+I think Lookspan is a game-changer for anyone working with LLMs. As someone who's struggled with the opacity of these models, I can appreciate the value of having a tool that can help me understand what's going on. Of course, there are still many challenges to overcome, but I'm excited to see where Lookspan goes from here.
+
+## Conclusion
+If you're working with LLMs, Lookspan is definitely worth checking out. It's still early days, but the potential is huge. By providing local-first observability and replay capabilities, Lookspan can help you debug issues faster, improve your models, and unlock new insights.
+
+TL;DR: Lookspan is a powerful tool for anyone working with LLMs. Give it a try and see how it can help you crack open the black box of large language models! 🚀
+Source: [DEV Community](https://dev.to/jonimatiin/building-lookspan-local-first-observability-replay-for-llm-apps-v040-441a)
