@@ -1,0 +1,35 @@
+---
+title: "Prioritizing Pull Requests with AI: A Game Changer for GitHub Users"
+publishedAt: "2026-06-20"
+summary: " Revolutionizing the way you manage your GitHub inbox ..."
+image: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODE5NzA0NzJ8&ixlib=rb-4.1.0&q=80&w=1080"
+tags: ["github", "ai", "productivity", "coding", "chrome extensions"]
+---
+
+![Cover Image](https://images.unsplash.com/photo-1587620962725-abab7fe55159?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODE5NzA0NzJ8&ixlib=rb-4.1.0&q=80&w=1080)
+
+# Prioritizing Pull Requests with AI: A Game Changer for GitHub Users
+ *_Revolutionizing the way you manage your GitHub inbox_* 
+
+Hey there! I'm Karan, and today I want to talk about something that's been a thorn in the side of many developers: prioritizing pull requests on GitHub. We've all been there - scrolling through a long list of PRs, trying to decide which one to tackle first. But what if I told you there's a better way?
+
+## The Problem with GitHub's Default Inbox
+GitHub shows your pull requests in the order they were opened, not in the order they actually need your attention. This means that a one-line typo fix and a PR that touches sensitive authentication code get the same visual weight in your inbox. Multiply this across a dozen open PRs, and you'll spend more time deciding what to look at than actually reviewing.
+
+## What is PR Focus?
+PR Focus is a Chrome extension that sits on top of GitHub's PR pages and combines three signals into a single priority queue:
+* **CI status** — failing checks bubble up to the top
+* **PR age** — stale PRs don't get forgotten
+* **AI risk score (0–100)** — weighted toward changes that touch authentication or database code
+
+This means that you'll see the most critical PRs at the top of your inbox, and the less important ones will be tucked away at the bottom. No more scrolling through a long list of PRs to find the one that needs your attention the most.
+
+## How PR Focus Uses AI
+The AI risk score is where things get really interesting. Instead of running its own AI backend, PR Focus uses a "bring your own kernel" (BYOK) approach. This means that the developer can use their own AI model to power the risk score, or use a pre-trained model provided by the extension. This approach has several benefits, including reduced latency and improved security.
+
+## My Take
+I have to say, I'm impressed by the simplicity and effectiveness of PR Focus. As a developer, I know how frustrating it can be to waste time scrolling through a long list of PRs. With PR Focus, you can focus on what really matters - reviewing and merging code. And the fact that it uses a BYOK approach to AI is just the cherry on top.
+
+## Conclusion
+Prioritizing pull requests with AI is a total game changer for GitHub users. With PR Focus, you can say goodbye to wasted time and hello to increased productivity. So why not give it a try? Your future self will thank you.
+Source: [DEV Community](https://dev.to/projekta2/i-built-an-ai-priority-inbox-for-github-pull-requests-and-went-byok-instead-of-running-my-own-ai-19ij)
