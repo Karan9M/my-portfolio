@@ -1,0 +1,31 @@
+---
+title: "The Ultimate Testing Fail: When Comments Lie to You 🤦‍♂️"
+publishedAt: "2026-06-27"
+summary: "A cautionary tale of testing gone wrong..."
+image: "https://images.unsplash.com/photo-1599556147768-581b8e1bcc3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODI1NzM2MTR8&ixlib=rb-4.1.0&q=80&w=1080"
+tags: ["testing", "comments", "production data", "coding mistakes", "software development"]
+---
+
+![Cover Image](https://images.unsplash.com/photo-1599556147768-581b8e1bcc3e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODI1NzM2MTR8&ixlib=rb-4.1.0&q=80&w=1080)
+
+# The Ultimate Testing Fail: When Comments Lie to You 🤦‍♂️
+_*A cautionary tale of testing gone wrong*_
+
+Hey there! I'm Karan, and today I want to talk about something that'll make you double-check your tests. 🤔 I recently came across a story that made me go "wow, this could happen to anyone." It's about a test that was supposed to have an "in memory fallback," but it didn't. Let's dive into what happened.
+
+## The Test That Fooled Everyone
+The test in question was `test_warmup_eval_no_flag_subprocess_exits_0`. It was running the real `warmup eval` command against the live production state file. Yes, you read that right - the live production state file. The test had a comment that said "in memory fallback," but that was a lie. There was no separate test context, no isolated state, and no in-memory fallback. Every time the test ran, it loaded the live warm-up anchor, evaluated it, and wrote back to the same file that was used in production.
+
+## How This Happened
+So, how did this happen? The editable install (`pip install -e`) resolved `STATE_PATH` at import time to wherever the real `state.json` lived. This meant that there was no separate test context, and the test was using the live production state file. The code path that the test exercised was a pass-through, which meant that it didn't update the state file if there were no changes. This is why the issue went unnoticed for so long.
+
+## The Importance of Accurate Comments
+This story highlights the importance of accurate comments in our code. Comments are meant to help us understand what the code is doing, but if they're wrong, they can lead to serious issues. In this case, the comment "in memory fallback" was misleading, and it took a long time to discover the truth. As developers, we need to make sure that our comments are accurate and up-to-date.
+
+## My Take
+Personally, I think this is a great reminder to always test our tests. We should never assume that our tests are working as expected, and we should always verify that they're doing what we think they're doing. This story could have ended much worse if the test had updated the production state file in a way that caused issues. It's a good thing that the code path was a pass-through, but we can't always rely on luck.
+
+## Conclusion
+In conclusion, this story teaches us the importance of accurate comments, testing our tests, and verifying that they're working as expected. We should never assume that our tests are correct, and we should always be cautious when working with production data. So, the next time you write a test, make sure to double-check that it's doing what you think it's doing. 🚀
+
+Source: [DEV Community](https://dev.to/arihantdeva/my-test-had-a-comment-that-said-in-memory-fallback-it-wasnt-cij)
