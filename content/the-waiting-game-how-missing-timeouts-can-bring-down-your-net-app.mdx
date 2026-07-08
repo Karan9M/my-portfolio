@@ -1,0 +1,45 @@
+---
+title: "The Waiting Game: How Missing Timeouts Can Bring Down Your .NET App"
+publishedAt: "2026-07-08"
+summary: "When requests hang forever, the clock is ticking for your production reliability ..."
+image: "https://images.unsplash.com/photo-1727083794704-45a551030067?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODM1MjY2NTR8&ixlib=rb-4.1.0&q=80&w=1080"
+tags: [".net", "timeouts", "production incidents", "app reliability", "coding best practices"]
+---
+
+![Cover Image](https://images.unsplash.com/photo-1727083794704-45a551030067?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODM1MjY2NTR8&ixlib=rb-4.1.0&q=80&w=1080)
+
+# The Waiting Game: How Missing Timeouts Can Bring Down Your .NET App
+_*When requests hang forever, the clock is ticking for your production reliability*_ 
+
+Hey there! I'm Karan, and today I want to talk about something that's been bothering me lately - the importance of timeouts in .NET applications. I mean, think about it... when was the last time you checked your code for missing timeouts? 🤔
+
+## The Problem with Hanging Requests
+We've all been there - your ASP.NET instances look healthy, CPU and memory usage are fine, but requests just stop finishing. The in-flight count climbs, connection pools stop turning over, and before you know it, your app is down. But here's the thing - most production incidents don't start with a loud "down" signal. They start with a slow, silent wait. 
+
+When a dependency slows down, your app can quickly become unresponsive, even if it's still "up" from a technical standpoint. And let's be honest, who hasn't seen this scenario play out in real-time? You're monitoring your app, everything looks good, and then suddenly... nothing. No errors, no warnings, just an endless wait. 
+
+### Why Timeouts Matter
+So, what's the big deal about timeouts? Well, for starters, they help prevent your app from hanging indefinitely. By setting a timeout, you're essentially saying, "Hey, if this request takes longer than X seconds, something's gone wrong - let's abort and try again." It's like setting a budget for your requests - if they can't finish within a certain time frame, they're not worth it. 
+
+And that's exactly what's missing in many .NET apps - a timeout budget. Without it, your app can become a victim of its own success, drowning in a sea of hanging requests. But don't just take my word for it - let's look at some numbers. 
+
+According to a recent study, most production incidents in .NET apps are caused by missing timeouts. That's right - not memory leaks, not CPU spikes, but plain old missing timeouts. So, what can you do about it?
+
+## Adding Timeouts Safely
+Okay, so you're convinced - timeouts are a must-have for your .NET app. But how do you add them without breaking everything? 🤔
+
+Here are a few tips to get you started:
+
+1. **Start small**: Begin with a small subset of your requests and add timeouts gradually.
+2. **Monitor closely**: Keep an eye on your app's performance after adding timeouts - you may need to adjust the timeout values.
+3. **Test thoroughly**: Make sure your timeouts are working as expected - test them in different scenarios.
+
+## My Take
+As someone who's worked with .NET for a while, I can tell you that missing timeouts are a silent killer. They can bring down your app without warning, leaving you scratching your head. But the good news is - it's an easy fix. By adding timeouts to your requests, you can prevent hanging requests and ensure your app stays responsive. 
+
+So, what's your take on timeouts? Do you have a favorite strategy for adding them to your .NET app? Let me know in the comments! 
+
+## Conclusion
+In conclusion, missing timeouts can be a major headache for .NET developers. But by understanding the importance of timeouts and adding them safely, you can prevent hanging requests and keep your app running smoothly. So, go ahead - give your app the gift of timeouts. Your users (and your sanity) will thank you. 🚀
+
+Source: [DEV Community](https://dev.to/matrixtrak/requests-hang-forever-why-missing-timeouts-cause-recurring-outages-in-net-5ffi)
