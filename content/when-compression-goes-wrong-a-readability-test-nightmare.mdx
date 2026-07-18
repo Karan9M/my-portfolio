@@ -1,0 +1,31 @@
+---
+title: "When Compression Goes Wrong: A Readability Test Nightmare 💔"
+publishedAt: "2026-07-18"
+summary: "A tale of a negative result, its root cause, and the feature it produced..."
+image: "https://images.unsplash.com/photo-1700832082152-0416a3ee5e60?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODQzODY4MDV8&ixlib=rb-4.1.0&q=80&w=1080"
+tags: ["compression", "readability", "ctxfold", "data compression", "programming"]
+---
+
+![Cover Image](https://images.unsplash.com/photo-1700832082152-0416a3ee5e60?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODQzODY4MDV8&ixlib=rb-4.1.0&q=80&w=1080)
+
+# When Compression Goes Wrong: A Readability Test Nightmare 💔
+_*A tale of a negative result, its root cause, and the feature it produced*_
+
+Hey there! I'm Karan, and today I want to talk about something that caught my attention recently. 🤔 It's a story about a developer who created a compression format called ctxfold, which is designed for lossless, structure-aware compression of bulky data in LLM prompts. Sounds cool, right? 🤓 However, when they ran a readability test on their own compression format, it scored a whopping 0/24. 😱
+
+## The Problem with CSV Readability
+So, what's the big deal about CSV readability? Well, when we're working with compressed data, we want to make sure that it can be easily read and used by our models. In this case, the developer had already tested their compression format on JSON and logs, and it worked like a charm. However, when it came to CSV, they only had a character count and an asterisk in their benchmark table. This meant that the CSV readability wasn't yet validated against a model.
+
+## Building a Readability Test
+To solve this problem, the developer decided to write a readability test for their CSV compression format. They generated 400 records, compressed them using ctxfold, and then tried to read them back using a model. The result? A score of 0/24. 🤦‍♂️ This meant that the model was unable to accurately read the compressed CSV data.
+
+### What Went Wrong?
+So, what caused this poor result? After some digging, the developer realized that the issue was due to the fact that their compression format wasn't optimized for CSV data. They had focused on compressing the data, but not on making it easily readable. This highlights the importance of considering readability when designing compression formats.
+
+## My Take
+I think this is a great example of how even the best-laid plans can go wrong. 🤦‍♂️ As developers, we often get caught up in the excitement of creating something new and innovative, and we forget to consider the potential pitfalls. In this case, the developer learned a valuable lesson about the importance of testing and validating their compression format. My opinion? This is a great reminder to always test our code thoroughly, especially when it comes to critical components like data compression.
+
+## Conclusion
+In the end, the developer's readability test may have scored 0/24, but it led to a valuable lesson and a new feature. 🚀 As developers, we can all learn from this experience. Remember to always test your code, consider the potential pitfalls, and don't be afraid to go back to the drawing board when things don't work out. 
+
+Source: [DEV Community](https://dev.to/maverickyadav/i-built-a-readability-test-for-my-own-compression-format-it-scored-024-4epc)
