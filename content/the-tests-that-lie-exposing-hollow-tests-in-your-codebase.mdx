@@ -1,0 +1,34 @@
+---
+title: "The Tests That Lie: Exposing Hollow Tests in Your Codebase"
+publishedAt: "2026-07-21"
+summary: "When coverage isn't everything..."
+image: "https://images.unsplash.com/photo-1582719471327-5bd41fcf7f7f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODQ2MTA4NTh8&ixlib=rb-4.1.0&q=80&w=1080"
+tags: ["testing", "hollowtest", "coding", "software development", "devtools"]
+---
+
+![Cover Image](https://images.unsplash.com/photo-1582719471327-5bd41fcf7f7f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w5MTUyMDd8MHwxfHJhbmRvbXx8fHx8fHx8fDE3ODQ2MTA4NTh8&ixlib=rb-4.1.0&q=80&w=1080)
+
+# The Tests That Lie: Exposing Hollow Tests in Your Codebase
+_*When coverage isn't everything*_
+
+Hey there! I'm Karan, and today I want to talk about something that's been bothering me lately. As developers, we've all been there - writing tests, running them, and feeling a sense of accomplishment when they all pass. But have you ever stopped to think about what those tests are actually proving? 
+
+## The Problem with Green Coverage
+We've all heard the phrase "test-driven development" and the importance of having a robust test suite. But what if I told you that it's possible to have green coverage without actually having any meaningful tests? It sounds crazy, but it's more common than you think. In fact, a recent survey found that many developers spend more time fixing "almost-right" AI output - and tests are one of the places where that "almost right" hides best.
+
+## What are Hollow Tests?
+So, what exactly are hollow tests? They're tests that pass but don't actually prove anything. Think about it - an AI assistant can write a function and then write a test that calls it, prints something, and ends with `assert result is not None`. Coverage goes up, but confidence shouldn't. These tests are like empty calories - they might make you feel good, but they're not providing any real value.
+
+## The Solution: hollowtest
+That's where `hollowtest` comes in - a tool designed to catch those hollow tests statically, before they land in main. It's like having a second pair of eyes on your code, making sure that your tests are actually doing what they're supposed to do. By using `hollowtest`, you can ensure that your tests are robust and meaningful, rather than just empty placeholders.
+
+## My Take
+I have to say, I'm impressed by `hollowtest`. As someone who's spent countless hours writing and debugging tests, I know how frustrating it can be to have tests that don't actually prove anything. `hollowtest` is a game-changer - it's like having a personal testing assistant, making sure that your tests are up to par.
+
+## How to Use hollowtest
+So, how do you get started with `hollowtest`? It's actually pretty simple. You can check out the GitHub repository and follow the instructions to get started. The tool is easy to use and integrates well with your existing test suite. Plus, it's open-source, so you can contribute to it and make it even better.
+
+## Conclusion
+In conclusion, `hollowtest` is a must-have tool for any developer who wants to make sure their tests are actually proving something. Don't let hollow tests fool you - use `hollowtest` to ensure that your tests are robust and meaningful. Trust me, your future self (and your team) will thank you. 
+
+Source: [DEV Community](https://dev.to/sybilgambleyyu/hollowtest-find-tests-that-pass-but-prove-nothing-2iii)
